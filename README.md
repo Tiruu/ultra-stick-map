@@ -1,4 +1,4 @@
-# Stickmap
+# Ultra Stick Map
 
 A community mapping web app for discovering and sharing places related to stickers.
 
