@@ -1,129 +1,133 @@
-# Ultra Auxerre Map
+# Stickmap
 
-> Une carte communautaire dédiée aux sticks liés aux supporters de l'AJ Auxerre.
+A community map for discovering and sharing places related to stickers.
 
-**Demo :** https://ultra-auxerre-map.vercel.app/
+The project is a full web application built to experiment with **React, TypeScript, Supabase and MapLibre** while solving a concrete community-oriented problem.
 
-## Présentation
+> **Status:** Active development
 
-Ultra Auxerre Map est une application web communautaire permettant de localiser des sticks sur une carte, de les consulter, de signaler leur présence ou leur disparition, et de construire progressivement une communauté autour de ces contributions.
+## Features
 
-Le projet est pensé comme une base évolutive : gestion des comptes, profils publics, amis, classement des contributeurs, validation communautaire et outils de modération sont déjà intégrés au socle de l'application.
+- Interactive map
+- Place / point-of-interest discovery
+- User accounts
+- User profiles
+- Community contributions
+- Database-backed data
+- MapLibre rendering
+- Geolocation / map interactions
+- Bot protection with Cloudflare Turnstile
+- Analytics and performance monitoring
 
-À terme, le projet a vocation à évoluer vers une expérience plus large autour des clubs, des territoires et de la compétition communautaire.
-
-## Fonctionnalités actuelles
-
-- Carte interactive basée sur **MapLibre GL**.
-- Recherche d'adresses et de villes via un geocoder basé sur Nominatim.
-- Ajout de sticks directement depuis la carte.
-- Ajout d'une description et d'une photo à un stick.
-- Affichage des sticks avec clustering lorsque la carte est dézoomée.
-- Statut visuel des sticks selon leur état de modération et les dernières informations disponibles.
-- Consultation détaillée d'un stick avec auteur, photo, description, coordonnées, confirmations et signalements.
-- Confirmation communautaire de présence d'un stick.
-- Signalement d'un stick disparu.
-- Comptes utilisateurs avec profil et historique des contributions.
-- Modification du pseudo.
-- Profils publics.
-- Système d'amis avec demandes, acceptation et refus.
-- Recherche d'utilisateurs par adresse email.
-- Classement des contributeurs.
-- Validation communautaire des nouveaux sticks.
-- Interface de modération pour les administrateurs.
-- Suppression administrative des sticks.
-- Déploiement continu via **Vercel**.
-
-## Stack technique
+## Tech stack
 
 ### Frontend
 
-- **React**
-- **TypeScript**
-- **Vite**
-- **MapLibre GL**
-- **@maplibre/maplibre-gl-geocoder**
-- **CSS** personnalisé avec une identité visuelle inspirée de l'AJ Auxerre
+- React
+- TypeScript
+- Vite
+- MapLibre GL
 
 ### Backend / services
 
-- **Supabase** pour l'authentification, la base de données et le stockage des photos.
-- **Nominatim / OpenStreetMap** pour la recherche d'adresses.
-- **Vercel** pour le déploiement et les analytics/performance.
+- Supabase
+- PostgreSQL
+- Supabase Auth
+- Supabase client
+
+### Other
+
+- Turf
+- Cloudflare Turnstile
+- Vercel Analytics
+- Vercel Speed Insights
+- ESLint
+- Prettier
+- Git / GitHub
 
 ## Architecture
 
-Le projet a été structuré pour éviter de concentrer toute la logique dans `App.tsx`.
-
 ```text
-src/
-├── components/       # Composants d'interface
-├── hooks/            # Logique React et état métier
-│   ├── useFriends.ts
-│   ├── useModeration.ts
-│   ├── useSticks.ts
-│   ├── useRanking.ts
-│   ├── usePublicProfile.ts
-│   └── useMap.ts
-├── services/         # Accès Supabase et logique d'accès aux données
-├── utils/            # Fonctions utilitaires et configuration de carte
-├── types/            # Types TypeScript partagés
-├── App.tsx           # Composition principale de l'application
-└── ...
+React + TypeScript
+        │
+        ├── MapLibre
+        │
+        ├── Supabase Auth
+        │
+        └── Supabase / PostgreSQL
+                │
+                ▼
+          Community data
 ```
 
-La logique spécifique à MapLibre est isolée dans `useMap.ts`, tandis que les fonctionnalités métiers importantes sont réparties dans des hooks dédiés.
+The application is intentionally client-heavy: React handles the UI and interactions while Supabase provides authentication, persistence and database-backed features.
 
-## Gestion de la carte
+## Development
 
-La carte utilise :
+Install dependencies:
 
-- un worker MapLibre configuré via Vite ;
-- une source GeoJSON pour les sticks ;
-- le clustering natif de MapLibre ;
-- des layers distincts pour les clusters et les points ;
-- un geocoder personnalisé ;
-- un mode d'ajout permettant de placer un marker sur la carte.
+```bash
+npm install
+```
 
-Les données des sticks sont transformées en GeoJSON via un utilitaire dédié et les couleurs de la carte sont centralisées dans `src/utils/mapColors.ts`.
+Start the development server:
 
-## Déploiement
+```bash
+npm run dev
+```
 
-Le projet est déployé sur **Vercel** et utilise le build Vite pour produire la version de production.
+Build the project:
 
-URL de démonstration :
+```bash
+npm run build
+```
 
-**https://ultra-auxerre-map.vercel.app/**
+Preview a production build:
 
-## Roadmap
+```bash
+npm run preview
+```
 
-Le projet est en évolution. Les prochaines fonctionnalités envisagées incluent notamment :
+Lint the project:
 
-- Recherche d'amis par pseudo avec pseudo unique.
-- Distinction entre un stick **vu** et un stick **collé**.
-- Refonte du système de points et du classement selon les contributions.
-- Classement des amis pleinement fonctionnel.
-- Amélioration de la logique de statut après signalement d'un stick.
-- Amélioration des différents modes de connexion.
-- Amélioration visuelle de certaines interfaces, notamment les actions d'administration.
-- Ajouter un écran de présentation au premier lancement pour expliquer le concept, le fonctionnement de la carte, les actions possibles et le système de contributions, avec une option « Ne plus afficher » mémorisée pour les visites suivantes.
-- Préparation d'une version **PWA** installable sur mobile.
-- À plus long terme, ouverture du concept à plusieurs clubs et création d'un système de **guerre de territoires** basé sur la présence de sticks par ville ou zone géographique.
+```bash
+npm run lint
+```
 
-## Vision à long terme
+Format the source:
 
-L'objectif n'est pas seulement de construire une carte de sticks, mais de faire évoluer le projet vers une plateforme communautaire liée aux supporters et à leur présence sur le territoire.
+```bash
+npm run format
+```
 
-Une évolution possible serait de représenter les zones géographiques selon la densité de sticks attribués à différents clubs, afin de transformer la carte en véritable système de territoires et de compétition communautaire.
+## Environment variables
 
-## Statut du projet
+Create a local environment file with the values required by the Supabase and Turnstile integrations.
 
-Projet personnel en développement continu.
+Do not commit private credentials or service-role keys.
 
-Le prototype actuel est fonctionnel et déployé en ligne. L'architecture est volontairement conçue pour pouvoir évoluer progressivement vers une application mobile et vers un système multi-clubs.
+## Live demo
 
----
+[Open the application](https://ultra-stick-map.vercel.app)
 
-### Auteur
+## Why I built it
 
-Projet développé par **Lino Thebault**.
+Stickmap is a project where I wanted to go beyond isolated frontend exercises.
+
+The goal was to build a real application with:
+
+- authentication
+- persistent data
+- user-generated content
+- an interactive map
+- multiple external services
+- deployment
+- production-oriented tooling
+
+It is also a way for me to deepen my React and TypeScript skills through a project that is large enough to expose real architectural problems.
+
+## Current status
+
+The project is still evolving.
+
+The codebase is intentionally public so that the project can serve as both a working application and a record of my progress as a developer.
