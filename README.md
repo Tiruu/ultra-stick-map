@@ -1,48 +1,52 @@
 # Stickmap
 
-A community map for discovering and sharing places related to stickers.
+A community mapping web app for discovering and sharing places related to stickers.
 
-The project is a full web application built to experiment with **React, TypeScript, Supabase and MapLibre** while solving a concrete community-oriented problem.
+[**Live demo →**](https://ultra-stick-map.vercel.app)
 
 > **Status:** Active development
 
-## Features
+## What I built
 
-- Interactive map
+Stickmap started as a way to go beyond isolated frontend exercises and build a complete web application around a concrete community use case.
+
+The application combines an interactive map, user accounts, profiles and community contributions with persistent database-backed data.
+
+### Core features
+
+- Interactive map with MapLibre GL
 - Place / point-of-interest discovery
-- User accounts
+- User accounts and authentication
 - User profiles
 - Community contributions
-- Database-backed data
-- MapLibre rendering
-- Geolocation / map interactions
+- Persistent database-backed data
+- Geolocation and map interactions
 - Bot protection with Cloudflare Turnstile
 - Analytics and performance monitoring
 
 ## Tech stack
 
-### Frontend
+**Frontend**
 
 - React
 - TypeScript
 - Vite
 - MapLibre GL
 
-### Backend / services
+**Backend / data**
 
 - Supabase
 - PostgreSQL
 - Supabase Auth
 - Supabase client
 
-### Other
+**Other**
 
 - Turf
 - Cloudflare Turnstile
 - Vercel Analytics
 - Vercel Speed Insights
-- ESLint
-- Prettier
+- ESLint / Prettier
 - Git / GitHub
 
 ## Architecture
@@ -60,7 +64,7 @@ React + TypeScript
           Community data
 ```
 
-The application is intentionally client-heavy: React handles the UI and interactions while Supabase provides authentication, persistence and database-backed features.
+React handles the interface and client-side interactions, while Supabase provides authentication, persistence and database-backed features.
 
 ## Development
 
@@ -106,28 +110,12 @@ Create a local environment file with the values required by the Supabase and Tur
 
 Do not commit private credentials or service-role keys.
 
-## Live demo
+## Why this project matters
 
-[Open the application](https://ultra-stick-map.vercel.app)
+This project is currently my main web development project. It gives me practical experience with the parts of a modern web application that are easy to avoid in small exercises: authentication, persistent data, user-generated content, map interactions, external services and deployment.
 
-## Why I built it
-
-Stickmap is a project where I wanted to go beyond isolated frontend exercises.
-
-The goal was to build a real application with:
-
-- authentication
-- persistent data
-- user-generated content
-- an interactive map
-- multiple external services
-- deployment
-- production-oriented tooling
-
-It is also a way for me to deepen my React and TypeScript skills through a project that is large enough to expose real architectural problems.
+It is also where I am deepening my React and TypeScript skills by solving real implementation and architecture problems as the application grows.
 
 ## Current status
 
-The project is still evolving.
-
-The codebase is intentionally public so that the project can serve as both a working application and a record of my progress as a developer.
+Stickmap is still evolving and the codebase remains public as both a working application and a record of the project's development.
