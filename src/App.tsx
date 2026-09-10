@@ -18,6 +18,7 @@ import StickForm from "./components/StickForm";
 import StickDetails from "./components/StickDetails";
 import ValidationPanel from "./components/ValidationPanel";
 import AdminModerationPanel from "./components/AdminModerationPanel";
+import PresentationPopup, { shouldShowPresentation } from "./components/PresentationPopup";
 import { getUserSticks, getConfirmations, getReports } from "./services/sticks";
 import { getProfile } from "./services/profiles";
 import { getStickPhotoUrl } from "./services/storage";
@@ -46,6 +47,7 @@ function App() {
   const [reports, setReports] = useState<StickReport[]>([]);
   const [showValidation, setShowValidation] = useState(false);
   const [showAdminModeration, setShowAdminModeration] = useState(false);
+  const [showPresentation, setShowPresentation] = useState(shouldShowPresentation);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
   const [isSavingStick, setIsSavingStick] = useState(false);
   const { pendingSticks, reviewSticks, validationIndex, setValidationIndex, adminModerationIndex, setAdminModerationIndex, handleValidationVote, handleAdminApproveStick, handleAdminRejectStick } = useModeration({ user, isAdmin, onError: setToastMessage });
@@ -101,6 +103,13 @@ function App() {
   }
 
   async function loadStickHistory(stickId: string) {
+    if (!user) {
+      setConfirmations([]);
+      setReports([]);
+      setLastActivityAuthor(null);
+      return;
+    }
+
     try {
       const [confirmationsData, reportsData] = await Promise.all([getConfirmations(stickId), getReports(stickId)]);
       setConfirmations(confirmationsData); setReports(reportsData); await loadLastActivityAuthor(confirmationsData, reportsData);
@@ -164,6 +173,7 @@ function App() {
   return (
     <>
       <div ref={mapContainer} className="map" />
+      {showPresentation && <PresentationPopup onClose={() => setShowPresentation(false)} />}
       {!user && <button className="login-button" onClick={() => setShowAuth(true)}>Se connecter</button>}
       {showAuth && !user && <div className="auth-overlay"><Auth /></div>}
       {user && <UserPanel profile={profile} onLogout={logout} onOpenProfile={openProfile} />}
@@ -244,6 +254,7 @@ function App() {
 
       {selectedStick && <StickDetails
         stick={selectedStick}
+        status={stickStatuses[selectedStick.id] ?? "unknown"}
         author={selectedAuthor}
         confirmations={confirmations}
         reports={reports}
