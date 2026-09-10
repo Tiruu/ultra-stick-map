@@ -1,4 +1,4 @@
-# Stick Map
+# Ultra Stick Map
 
 A community mapping web app for discovering and sharing physical sticks and points of interest.
 
