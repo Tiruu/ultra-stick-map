@@ -53,7 +53,7 @@
         <li>confirmations, signalements et actions de contribution ;</li>
         <li>relations d'amitié et interactions sociales ;</li>
         <li>données techniques nécessaires au fonctionnement, à la sécurité et au diagnostic du service ;</li>
-        <li>données de localisation lorsque les fonctionnalités de localisation du navigateur ou une vérification de proximité sont utilisées ;</li>
+        <li>données de localisation utilisées en temps réel lorsque la géolocalisation du navigateur est autorisée, notamment pour maintenir à jour la position de l'utilisateur sur la carte et permettre les fonctionnalités nécessitant sa proximité ;</li>
         <li>requêtes saisies dans le moteur de recherche d'adresses, lorsqu'une recherche est effectuée.</li>
       </ul>
 
@@ -67,13 +67,13 @@
         <li><strong>Sécurité, prévention des abus et protection du service :</strong> intérêt légitime du responsable du traitement à assurer la sécurité et l'intégrité du service.</li>
         <li><strong>Respect des obligations légales :</strong> respect des obligations auxquelles le responsable du traitement est soumis.</li>
         <li><strong>Mesure d'audience et de performance :</strong> intérêt légitime lorsque les conditions permettant leur utilisation sans consentement sont réunies ; dans le cas contraire, le consentement requis est recueilli avant le traitement concerné.</li>
-        <li><strong>Géolocalisation :</strong> utilisation uniquement pour les fonctionnalités qui nécessitent la position de l'utilisateur, sur la base de la nécessité du service demandé lorsque la position est indispensable à cette fonctionnalité.</li>
+        <li><strong>Géolocalisation :</strong> traitement en temps réel nécessaire au fonctionnement des fonctionnalités qui utilisent la position de l'utilisateur, notamment le suivi de sa position sur la carte et les fonctionnalités nécessitant une proximité géographique.</li>
       </ul>
 
       <h3>Données obligatoires et facultatives</h3>
       <p>Certaines données sont nécessaires pour créer et utiliser un compte, notamment l'adresse e-mail, le mot de passe et les informations nécessaires à l'authentification. Leur absence peut empêcher la création ou l'utilisation du compte.</p>
       <p>Le pseudo est nécessaire aux fonctionnalités de profil et d'interaction communautaire. Les contributions, photos et interactions sociales sont fournies lorsque l'utilisateur choisit d'utiliser les fonctionnalités correspondantes.</p>
-      <p>La localisation n'est pas nécessaire pour consulter librement la carte. Lorsqu'une fonctionnalité utilise la position du navigateur, l'utilisateur peut refuser l'autorisation ; la fonctionnalité concernée pourra alors ne pas être disponible. Ultra Stick Map n'utilise pas ces données pour suivre les déplacements à des fins publicitaires ou de profilage.</p>
+      <p>La consultation générale de la carte reste possible sans autoriser la géolocalisation. Lorsque celle-ci est refusée, les fonctionnalités qui nécessitent la position de l'utilisateur, notamment le suivi de sa position sur la carte ou certaines vérifications de proximité, peuvent ne pas être disponibles. Ultra Stick Map n'utilise pas ces données pour la publicité ou le profilage.</p>
 
       <h3>Destinataires et services tiers</h3>
       <p>Selon les finalités, les données peuvent être accessibles :</p>
@@ -98,16 +98,16 @@
         <li><strong>Contributions publiées :</strong> pendant leur présence sur le service ou jusqu'à leur suppression, notamment à la demande de l'utilisateur ou dans le cadre de la modération.</li>
         <li><strong>Signalements, confirmations et données de modération :</strong> pendant la durée nécessaire au suivi, à la sécurité et à la modération du service.</li>
         <li><strong>Données techniques et de sécurité :</strong> pendant une durée proportionnée aux besoins de sécurité, de diagnostic et de prévention des abus.</li>
-        <li><strong>Données de localisation :</strong> utilisées en mémoire pour les fonctionnalités concernées et non conservées par Ultra Stick Map sous la forme d'un historique permanent des déplacements.</li>
+        <li><strong>Données de localisation :</strong> traitées en temps réel côté application pour suivre la position de l'utilisateur et permettre les fonctionnalités concernées ; elles ne sont pas conservées par Ultra Stick Map sous la forme d'un historique permanent des déplacements.</li>
         <li><strong>Données de mesure d'audience et de performance :</strong> selon les durées et modalités propres aux services Vercel utilisés et décrites dans leurs informations de confidentialité.</li>
         <li><strong>Requêtes de recherche d'adresse :</strong> transmises au service de géocodage uniquement lors d'une recherche ; Ultra Stick Map ne constitue pas un historique de ces recherches dans sa propre base de données.</li>
       </ul>
       <p>Certaines données peuvent être conservées plus longtemps lorsqu'une obligation légale, un litige, une nécessité de sécurité ou une contrainte technique de sauvegarde le justifie.</p>
 
       <h3>Géolocalisation</h3>
-      <p>Lorsque l'utilisateur autorise la géolocalisation de son navigateur, Ultra Stick Map peut recevoir sa latitude, sa longitude et la précision associée afin d'afficher sa position ou de faciliter une fonctionnalité nécessitant une proximité géographique.</p>
-      <p>Ces informations sont utilisées côté application pour les fonctionnalités concernées et ne sont pas enregistrées par Ultra Stick Map comme un historique permanent des déplacements.</p>
-      <p>L'utilisateur peut retirer ou refuser l'autorisation de géolocalisation via les paramètres de son navigateur. La consultation générale de la carte reste possible sans cette autorisation.</p>
+      <p>Lorsque l'utilisateur autorise la géolocalisation de son navigateur, Ultra Stick Map peut recevoir de manière continue sa latitude, sa longitude et la précision associée afin de maintenir à jour sa position sur la carte et de permettre les fonctionnalités nécessitant sa proximité géographique.</p>
+      <p>Cette position est traitée en temps réel côté application. Ultra Stick Map ne l'utilise pas pour constituer un historique permanent des déplacements, ni à des fins publicitaires ou de profilage.</p>
+      <p>L'utilisateur peut refuser ou retirer l'autorisation de géolocalisation via les paramètres de son navigateur. La consultation générale de la carte reste possible sans cette autorisation, mais les fonctionnalités dépendant de la position peuvent alors être indisponibles.</p>
 
       <h3>Mesure d'audience et performance</h3>
       <p>Ultra Stick Map utilise Vercel Web Analytics et Vercel Speed Insights. Ces services permettent notamment d'obtenir des statistiques agrégées de fréquentation et des informations techniques relatives aux performances du site.</p>
