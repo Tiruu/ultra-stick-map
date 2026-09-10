@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import "./PresentationPopup.css";
 
 type PresentationPopupProps = {
   onClose: () => void;
@@ -15,14 +16,10 @@ export default function PresentationPopup({ onClose }: PresentationPopupProps) {
     localStorage.setItem(STORAGE_KEY, String(showEveryLaunch));
   }, [showEveryLaunch]);
 
-  function handleClose() {
-    onClose();
-  }
-
   return (
     <div className="presentation-overlay" role="dialog" aria-modal="true" aria-labelledby="presentation-title">
       <div className="presentation-modal">
-        <button className="presentation-close" onClick={handleClose} aria-label="Fermer">
+        <button className="presentation-close" onClick={onClose} aria-label="Fermer">
           ✕
         </button>
 
@@ -51,7 +48,7 @@ export default function PresentationPopup({ onClose }: PresentationPopupProps) {
           <span>Afficher cette présentation à chaque lancement</span>
         </label>
 
-        <button className="presentation-confirm" onClick={handleClose}>
+        <button className="presentation-confirm" onClick={onClose}>
           J&apos;ai compris
         </button>
       </div>
