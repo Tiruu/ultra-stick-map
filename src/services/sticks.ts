@@ -192,17 +192,13 @@ export async function getPendingSticks(): Promise<Stick[]> {
   return data;
 }
 
-export async function voteOnStick(
+export async function moderatePendingStick(
   stickId: string,
-  vote: "approve" | "reject",
-  latitude: number,
-  longitude: number,
+  status: "approved" | "rejected",
 ): Promise<void> {
-  const { error } = await supabase.rpc("vote_on_stick_nearby", {
+  const { error } = await supabase.rpc("moderate_pending_stick", {
     p_stick_id: stickId,
-    p_vote: vote,
-    p_latitude: latitude,
-    p_longitude: longitude,
+    p_status: status,
   });
 
   if (error) {
