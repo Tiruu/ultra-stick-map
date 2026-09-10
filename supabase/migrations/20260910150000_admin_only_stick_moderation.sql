@@ -65,8 +65,6 @@ begin
 end;
 $$;
 
--- Keep the public wrapper available to the existing client code.
-
 -- ============================================================
 -- One moderator decision = approved or rejected
 -- ============================================================
@@ -136,3 +134,9 @@ revoke execute on function private.vote_on_stick_nearby(
   double precision,
   double precision
 ) from public, anon, authenticated;
+
+-- Existing sticks that reached the old 3-vote review stage are
+-- returned to the new moderator queue so none are stranded.
+update public.sticks
+set moderation_status = 'pending'
+where moderation_status = 'review';

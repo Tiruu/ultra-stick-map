@@ -35,8 +35,8 @@ export default function PresentationPopup({ onClose }: PresentationPopupProps) {
               ajoutés par la communauté.
             </p>
             <p>
-              Les utilisateurs peuvent ajouter un stick, puis confirmer qu&apos;il est
-              toujours présent ou signaler qu&apos;il a disparu.
+              Un stick peut être ajouté depuis n&apos;importe où. Il reste en attente jusqu&apos;à
+              ce qu&apos;un modérateur vérifie la publication et décide de l&apos;accepter ou de la refuser.
             </p>
             <p className="presentation-warning">
               Les informations sont fournies par les utilisateurs et peuvent être
@@ -46,45 +46,46 @@ export default function PresentationPopup({ onClose }: PresentationPopupProps) {
         ) : (
           <>
             <p className="presentation-kicker">Comment ça marche ?</p>
-            <h1 id="presentation-title">Une carte vérifiée par la communauté</h1>
+            <h1 id="presentation-title">Publication puis vérification</h1>
 
             <p>
-              Chaque stick évolue selon les retours des utilisateurs qui le rencontrent
-              sur le terrain. L&apos;objectif est de garder la carte aussi fiable que possible
-              dans le temps.
+              La publication et la vérification sont volontairement séparées : un utilisateur
+              peut proposer un stick sans avoir besoin d&apos;un autre utilisateur sur place.
+              Les modérateurs disposent ensuite d&apos;une file dédiée pour contrôler les nouvelles
+              publications, sans contrainte de distance.
             </p>
 
             <div style={{ display: "grid", gap: 10, margin: "18px 0" }}>
-              <div style={{ padding: "11px 13px", borderRadius: 10, background: "#f0fdf4", border: "1px solid #bbf7d0" }}>
-                <strong>Présent</strong>
+              <div style={{ padding: "11px 13px", borderRadius: 10, background: "#fff7ed", border: "1px solid #fed7aa" }}>
+                <strong>En attente</strong>
                 <div style={{ marginTop: 3, color: "#64748b", fontSize: 13 }}>
-                  Des utilisateurs ont confirmé que le stick est toujours là.
+                  Le stick vient d&apos;être proposé et attend une décision de modération.
+                </div>
+              </div>
+              <div style={{ padding: "11px 13px", borderRadius: 10, background: "#f0fdf4", border: "1px solid #bbf7d0" }}>
+                <strong>Validé</strong>
+                <div style={{ marginTop: 3, color: "#64748b", fontSize: 13 }}>
+                  Un modérateur a accepté le stick : il devient visible sur la carte.
                 </div>
               </div>
               <div style={{ padding: "11px 13px", borderRadius: 10, background: "#f8fafc", border: "1px solid #dbe4ef" }}>
-                <strong>Inconnu</strong>
+                <strong>Vérification communautaire</strong>
                 <div style={{ marginTop: 3, color: "#64748b", fontSize: 13 }}>
-                  Il n&apos;y a pas encore assez de retours pour déterminer son état.
-                </div>
-              </div>
-              <div style={{ padding: "11px 13px", borderRadius: 10, background: "#fff7ed", border: "1px solid #fed7aa" }}>
-                <strong>Absent</strong>
-                <div style={{ marginTop: 3, color: "#64748b", fontSize: 13 }}>
-                  Plusieurs signalements concordants indiquent qu&apos;il pourrait avoir disparu.
+                  Une fois publié, les utilisateurs peuvent confirmer sa présence ou signaler sa disparition.
                 </div>
               </div>
             </div>
 
             <p>
-              <strong>Une confirmation récente peut remettre un stick comme présent</strong>{" "}
-              après des signalements. Un signalement isolé ne suffit pas à lui seul à le
-              faire disparaître : le système cherche à limiter les erreurs et les abus.
+              <strong>Une seule décision de modération suffit.</strong> Un modérateur peut
+              valider ou refuser un nouveau stick à distance. Il peut consulter sa photo,
+              sa description et son emplacement avant de prendre sa décision.
             </p>
 
             <p>
-              En pratique : vous trouvez un stick → vous le consultez → vous confirmez
-              sa présence ou vous le signalez s&apos;il n&apos;est plus là. C&apos;est cette boucle
-              communautaire qui permet de maintenir la carte à jour.
+              Ensuite : vous trouvez un stick → vous le consultez → vous confirmez sa présence
+              ou vous le signalez s&apos;il n&apos;est plus là. Ces retours permettent de garder la carte
+              à jour dans le temps.
             </p>
           </>
         )}

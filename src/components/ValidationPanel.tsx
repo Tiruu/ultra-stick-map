@@ -33,9 +33,8 @@ export default function ValidationPanel({
             ✕
           </button>
 
-          <h2>🔎 Validation</h2>
-
-          <p>Aucun stick à valider.</p>
+          <h2>🛡️ Modération</h2>
+          <p>Aucun stick en attente de modération.</p>
         </div>
       </div>
     );
@@ -58,8 +57,7 @@ export default function ValidationPanel({
 
         <div className="validation-header">
           <div>
-            <h2>🔎 Stick à valider</h2>
-
+            <h2>🛡️ Stick à modérer</h2>
             <p className="validation-counter">
               {currentIndex + 1} / {sticks.length}
             </p>
@@ -69,7 +67,7 @@ export default function ValidationPanel({
         {stick.photo_path && (
           <img
             src={getPhotoUrl(stick.photo_path) ?? undefined}
-            alt="Stick à valider"
+            alt="Stick à modérer"
             className="validation-photo"
           />
         )}
@@ -89,7 +87,6 @@ export default function ValidationPanel({
 
           <div className="validation-location">
             <strong>📍 Emplacement</strong>
-
             <span>
               {stick.latitude.toFixed(5)}, {stick.longitude.toFixed(5)}
             </span>
@@ -105,21 +102,21 @@ export default function ValidationPanel({
         </button>
 
         <p className="validation-help">
-          Rends-toi sur place avant de voter.
+          Cette décision est réservée aux modérateurs.
           <br />
-          Une vérification GPS est effectuée lors de la validation.
+          La validation ne nécessite pas d'être à proximité du stick.
         </p>
 
         <div className="validation-actions">
           <button className="validation-reject" onClick={() => onReject(stick)}>
-            ❌ Non-valable !
+            ❌ Refuser
           </button>
 
           <button
             className="validation-approve"
             onClick={() => onApprove(stick)}
           >
-            ✅ Valable !
+            ✅ Valider
           </button>
         </div>
 
