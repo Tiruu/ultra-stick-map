@@ -1,0 +1,61 @@
+/* -------------------- */
+/* LEGAL FOOTER         */
+/* -------------------- */
+
+.legal-pill {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+
+  z-index: 10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px));
+
+  border: 1px solid #dbe4ef;
+  border-bottom: none;
+  border-radius: 10px 10px 0 0;
+
+  background: rgba(255, 255, 255, 0.96);
+  color: #64748b;
+
+  font: 12px system-ui, sans-serif;
+  text-decoration: none;
+  white-space: nowrap;
+
+  box-shadow: 0 -2px 8px rgba(18, 32, 51, 0.08);
+}
+
+/* -------------------- */
+/* PRESENTATION POPUP   */
+/* -------------------- */
+
+.presentation-modal {
+  max-height: calc(100vh - 32px);
+  max-height: calc(100dvh - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* -------------------- */
+/* RESERVED FOOTER AREA */
+/* -------------------- */
+
+.ranking-button {
+  bottom: 64px;
+}
+
+@media (max-width: 700px) {
+  .user-panel {
+    bottom: 64px;
+  }
+
+  .ranking-button {
+    bottom: 64px;
+  }
+}
