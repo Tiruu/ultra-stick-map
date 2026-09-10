@@ -1,47 +1,47 @@
-# Ultra Stick Map
+# Stick Map
 
-A community mapping web app for discovering and sharing places related to stickers.
+A community mapping web app for discovering and sharing physical sticks and points of interest.
 
 [**Live demo →**](https://ultra-stick-map.vercel.app)
 
-> **Status:** Active development
+> **Status:** V1 — functional and ready for public testing
 
-## What I built
+## What is Stick Map?
 
-Stickmap started as a way to go beyond isolated frontend exercises and build a complete web application around a concrete community use case.
+Stick Map is a community map built around physical stickers and other user-contributed points.
 
-The application combines an interactive map, user accounts, profiles and community contributions with persistent database-backed data.
+Users can discover points on the map, add new ones, and help keep information up to date by confirming that a stick is still present or reporting that it has disappeared.
 
-### Core features
+Because the data is community-contributed, information may be incomplete, outdated or incorrect.
+
+## Core features
 
 - Interactive map with MapLibre GL
-- Place / point-of-interest discovery
+- Community-contributed sticks and points
 - User accounts and authentication
-- User profiles
-- Community contributions
-- Persistent database-backed data
+- User profiles and community interactions
+- Confirmation and disappearance reports
+- Moderation workflow
 - Geolocation and map interactions
+- Persistent database-backed data
 - Bot protection with Cloudflare Turnstile
 - Analytics and performance monitoring
 
 ## Tech stack
 
 **Frontend**
-
 - React
 - TypeScript
 - Vite
 - MapLibre GL
 
 **Backend / data**
-
 - Supabase
 - PostgreSQL
 - Supabase Auth
 - Supabase client
 
 **Other**
-
 - Turf
 - Cloudflare Turnstile
 - Vercel Analytics
@@ -110,12 +110,8 @@ Create a local environment file with the values required by the Supabase and Tur
 
 Do not commit private credentials or service-role keys.
 
-## Why this project matters
-
-This project is currently my main web development project. It gives me practical experience with the parts of a modern web application that are easy to avoid in small exercises: authentication, persistent data, user-generated content, map interactions, external services and deployment.
-
-It is also where I am deepening my React and TypeScript skills by solving real implementation and architecture problems as the application grows.
-
 ## Current status
 
-Stickmap is still evolving and the codebase remains public as both a working application and a record of the project's development.
+Stick Map V1 focuses on delivering a functional community mapping experience with authentication, user contributions, moderation and basic anti-abuse protections.
+
+Further features and improvements can be considered for future versions.
