@@ -51,11 +51,13 @@
 }
 
 @media (max-width: 700px) {
-  .user-panel {
+  /* App.css is loaded after the public stylesheet, so these mobile
+     positioning rules need stronger specificity to reserve the footer. */
+  body .user-panel {
     bottom: 64px;
   }
 
-  .ranking-button {
+  body .ranking-button {
     bottom: 64px;
   }
 }
