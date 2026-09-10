@@ -1,18 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
 
 import type { Stick } from "../types";
-import { getCurrentLocation } from "../utils/geolocation";
 import { getActionErrorMessage } from "../utils/actionErrors";
 
 import {
   getPendingSticks,
-  voteOnStick,
+  moderatePendingStick,
   getReviewSticks,
   approveReviewedStick,
   rejectReviewedStick,
 } from "../services/sticks";
-
-import { supabase } from "../supabase";
 
 type UserLike = {
   id: string;
@@ -30,37 +27,23 @@ export function useModeration({
   onError,
 }: UseModerationOptions) {
   const [pendingSticks, setPendingSticks] = useState<Stick[]>([]);
-
   const [reviewSticks, setReviewSticks] = useState<Stick[]>([]);
-
   const [validationIndex, setValidationIndex] = useState(0);
-
   const [adminModerationIndex, setAdminModerationIndex] = useState(0);
 
-  const loadPendingSticks = useCallback(async (userId: string) => {
+  const loadPendingSticks = useCallback(async () => {
+    if (!isAdmin) {
+      setPendingSticks([]);
+      return;
+    }
+
     try {
       const data = await getPendingSticks();
-
-      const { data: votes, error } = await supabase
-        .from("stick_validation_votes")
-        .select("stick_id")
-        .eq("user_id", userId);
-
-      if (error) {
-        throw error;
-      }
-
-      const votedStickIds = new Set(votes.map((vote) => vote.stick_id));
-
-      const availableSticks = data.filter(
-        (stick) => stick.user_id !== userId && !votedStickIds.has(stick.id),
-      );
-
-      setPendingSticks(availableSticks);
+      setPendingSticks(data);
     } catch (error) {
-      console.error("Erreur sticks à valider :", error);
+      console.error("Erreur chargement sticks en attente :", error);
     }
-  }, []);
+  }, [isAdmin]);
 
   const loadReviewSticks = useCallback(async () => {
     if (!isAdmin) {
@@ -70,7 +53,6 @@ export function useModeration({
 
     try {
       const data = await getReviewSticks();
-
       setReviewSticks(data);
     } catch (error) {
       console.error("Erreur chargement modération :", error);
@@ -79,37 +61,31 @@ export function useModeration({
 
   const handleValidationVote = useCallback(
     async (stick: Stick, vote: "approve" | "reject") => {
-      if (!user) return;
+      if (!user || !isAdmin) return;
 
       try {
-        const location = await getCurrentLocation();
-
-        await voteOnStick(
+        await moderatePendingStick(
           stick.id,
-          vote,
-          location.latitude,
-          location.longitude,
+          vote === "approve" ? "approved" : "rejected",
         );
 
-        await loadPendingSticks(user.id);
-
-        setValidationIndex(0);
+        await loadPendingSticks();
+        setValidationIndex((current) =>
+          Math.min(current, Math.max(0, pendingSticks.length - 2)),
+        );
       } catch (error) {
-        console.error("Erreur validation :", error);
-
+        console.error("Erreur modération :", error);
         onError(getActionErrorMessage(error));
       }
     },
-    [user, loadPendingSticks, onError],
+    [user, isAdmin, loadPendingSticks, pendingSticks.length, onError],
   );
 
   const handleAdminApproveStick = useCallback(
     async (stick: Stick) => {
       try {
         await approveReviewedStick(stick.id);
-
         await loadReviewSticks();
-
         setAdminModerationIndex(0);
       } catch (error) {
         console.error("Erreur validation admin :", error);
@@ -122,9 +98,7 @@ export function useModeration({
     async (stick: Stick) => {
       try {
         await rejectReviewedStick(stick.id);
-
         await loadReviewSticks();
-
         setAdminModerationIndex(0);
       } catch (error) {
         console.error("Erreur refus admin :", error);
@@ -134,22 +108,16 @@ export function useModeration({
   );
 
   useEffect(() => {
-    if (!user) {
+    if (!user || !isAdmin) {
+      setPendingSticks([]);
       return;
     }
 
-    const userId = user.id;
-
-    async function load() {
-      await loadPendingSticks(userId);
-    }
-
-    void load();
-  }, [user, loadPendingSticks]);
+    void loadPendingSticks();
+  }, [user, isAdmin, loadPendingSticks]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    loadReviewSticks();
+    void loadReviewSticks();
   }, [loadReviewSticks]);
 
   return {
